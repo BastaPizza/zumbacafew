@@ -20,7 +20,7 @@ jobs:
     - name: Installer les dépendances
       run: |
         npm install
-        sudo chmod -R 777 node_modules/.bin  # Ajout des bonnes permissions
+        sudo chmod -R 777 node_modules/.bin
 
     - name: Installer PHP
       run: sudo apt-get update && sudo apt-get install php-cli -y
