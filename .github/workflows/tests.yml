@@ -1,4 +1,4 @@
-name: Test Nom
+name: Test E2E (Formulaire)
 
 on:
   push:
@@ -18,7 +18,9 @@ jobs:
         node-version: '18'
 
     - name: Installer les dépendances
-      run: npm install
+      run: |
+        npm install
+        sudo chmod -R 777 node_modules/.bin  # Ajout des bonnes permissions
 
     - name: Installer PHP
       run: sudo apt-get update && sudo apt-get install php-cli -y
