@@ -1,4 +1,4 @@
-name: Test E2E
+name: Test Nom
 
 on:
   push:
@@ -8,32 +8,27 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
 
-    services:
-      php:
-        image: php:8.1-cli
-        options: >-
-          --health-cmd "php -v"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 8000:8000
-
     steps:
-    - name: Checkout repo
+    - name: Récupérer le code
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
+    - name: Installer Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
 
-    - name: Install dependencies
+    - name: Installer les dépendances
       run: npm install
 
-    - name: Start PHP server
+    - name: Installer PHP
+      run: sudo apt-get update && sudo apt-get install php-cli -y
+
+    - name: Lancer le serveur PHP
       run: php -S localhost:8000 -t public &
       shell: bash
 
-    - name: Run TestCafe
+    - name: Attendre que le serveur soit prêt
+      run: sleep 3
+
+    - name: Lancer les tests TestCafe
       run: npx testcafe chrome tests/nom.test.js
