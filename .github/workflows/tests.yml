@@ -32,5 +32,5 @@ jobs:
     - name: Attendre que le serveur soit prêt
       run: sleep 3
 
-    - name: Lancer les tests TestCafe
-      run: npx testcafe chrome tests/nom.test.js
+    - name: Lancer les tests TestCafe en mode headless
+      run: npx testcafe chrome:headless tests/nom.test.js
